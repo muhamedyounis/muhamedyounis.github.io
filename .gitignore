@@ -22,5 +22,5 @@ Thumbs.db
 package.json
 package-lock.json
 vite.config.js
-src/
-public/
+# src/
+# public/
