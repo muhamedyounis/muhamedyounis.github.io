@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Vercel configuration
+.vercel/
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Vite cache
+.vite/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+package.json
+package-lock.json
+vite.config.js
+src/
+public/
