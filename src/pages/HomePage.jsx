@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { articles } from '../data/articles.js';
 import { experiences } from '../data/experience.js';
 import { navItems, profile } from '../data/profile.js';
 import { projects } from '../data/projects.js';
@@ -13,7 +12,6 @@ import Footer from '../components/layout/Footer.jsx';
 import PageTitle from '../components/layout/PageTitle.jsx';
 import FeaturedProjectCard from '../components/projects/FeaturedProjectCard.jsx';
 import ProjectGrid from '../components/projects/ProjectGrid.jsx';
-import ArticleList from '../components/writing/ArticleList.jsx';
 
 function HomePage() {
   const activeSection = useActiveSection(navItems.map((item) => item.id));
@@ -30,21 +28,16 @@ function HomePage() {
           <section id="about" className="section-block scroll-mt-28" aria-labelledby="about-heading">
             <SectionHeading id="about-heading" subtle>About</SectionHeading>
             <div className="about-copy">
+              <p>Hi, I&apos;m Mohamed — a frontend web developer based in Cairo, Egypt.</p>
               <p>
-                Hi there. I&apos;m a frontend engineer who enjoys building calm, resilient interfaces
-                where <strong>great UX meets clean implementation</strong>.
+                I create polished, responsive websites that help organizations present their work clearly
+                and give visitors a smooth path to take action. My strongest experience is with
+                <strong> WordPress and WooCommerce</strong>, alongside modern frontend development with
+                JavaScript and React.
               </p>
               <p>
-                Currently, I work on product surfaces, component systems, and frontend architecture for
-                teams that care about <strong>accessibility, performance, and craft</strong>.
-              </p>
-              <p>
-                Previously, I have collaborated with product studios, platform teams, and early-stage
-                companies on web apps, documentation systems, and design-led product experiments.
-              </p>
-              <p>
-                Away from the editor, I&apos;m usually reading, sketching interface ideas, exploring new
-                cities, or attempting to make better coffee than yesterday.
+                I care about the details that make a site feel trustworthy: clear content hierarchy,
+                reliable responsive behavior, accessible interactions, and fast-loading pages.
               </p>
             </div>
           </section>
@@ -70,9 +63,18 @@ function HomePage() {
             </Link>
           </section>
 
-          <section id="writing" className="section-block scroll-mt-28" aria-labelledby="writing-heading">
-            <SectionHeading id="writing-heading" subtle>Writing</SectionHeading>
-            <ArticleList articles={articles} />
+          <section id="contact" className="section-block scroll-mt-28" aria-labelledby="contact-heading">
+            <SectionHeading id="contact-heading" subtle>Contact</SectionHeading>
+            <div className="contact-card">
+              <p className="meta">Have a project or opportunity?</p>
+              <h2>Let&apos;s build something useful.</h2>
+              <p className="text-secondary">
+                I&apos;m available for frontend development, WordPress builds, WooCommerce stores, and website improvements.
+              </p>
+              <a className="primary-link mt-6 inline-flex" href={`mailto:${profile.email}`}>
+                {profile.email} <ExternalLinkIcon />
+              </a>
+            </div>
           </section>
 
           <Footer />

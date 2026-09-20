@@ -25,8 +25,8 @@ function ProjectArchivePage() {
           <p className="meta">{projects.length} projects</p>
           <h1>Project Archive</h1>
           <p>
-            A data-driven collection of polished placeholder projects. Replace the content in
-            `src/data/projects.js` to make this archive your own.
+            A selection of websites, online stores, dashboards, and digital experiences I have built
+            across education, commerce, construction, technology, and professional services.
           </p>
         </header>
         <div className="filter-bar" aria-label="Filter projects by category">

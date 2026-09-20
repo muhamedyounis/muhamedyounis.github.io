@@ -9,44 +9,42 @@ export function useActiveSection(sectionIds) {
   useEffect(() => {
     if (!sectionIds.length) return undefined;
 
-    const visible = new Map();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            visible.set(entry.target.id, entry.boundingClientRect.top);
-          } else {
-            visible.delete(entry.target.id);
-          }
-        });
+    const updateActiveSection = () => {
+      const threshold = Math.min(window.innerHeight * 0.32, 280);
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
 
-        if (!visible.size) return;
-        const viewportTarget = window.innerHeight * 0.35;
-        const closest = [...visible.entries()].sort(
-          (a, b) => Math.abs(a[1] - viewportTarget) - Math.abs(b[1] - viewportTarget),
-        )[0][0];
-        setActiveSection((current) => (current === closest ? current : closest));
-      },
-      {
-        rootMargin: '-20% 0px -45% 0px',
-        threshold: [0, 0.1, 0.35, 0.6],
-      },
-    );
+      const current = sections.reduce((active, section) => {
+        return section.getBoundingClientRect().top <= threshold ? section.id : active;
+      }, sections[0]?.id);
 
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
+      if (current) {
+        setActiveSection((previous) => (previous === current ? previous : current));
+      }
+    };
+
+    let frameId;
+    const onScroll = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateActiveSection);
+    };
 
     const onHashChange = () => {
       const hash = window.location.hash.replace('#', '');
       if (sectionIds.includes(hash)) setActiveSection(hash);
+      else updateActiveSection();
     };
+
+    updateActiveSection();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     window.addEventListener('hashchange', onHashChange);
-    onHashChange();
 
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
       window.removeEventListener('hashchange', onHashChange);
     };
   }, [sectionIds]);

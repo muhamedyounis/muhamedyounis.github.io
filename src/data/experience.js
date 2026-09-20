@@ -1,30 +1,18 @@
 export const experiences = [
   {
-    period: '2024 - PRESENT',
-    role: 'Senior Frontend Engineer',
-    company: 'Acme Studio',
-    url: '#',
+    period: '2022 - PRESENT',
+    role: 'Frontend Web Developer',
+    company: 'Kinetics',
     description:
-      'Lead accessible interface architecture for data-rich product areas, partnering with design and platform teams to ship resilient component patterns.',
-    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Storybook', 'Accessibility'],
+      'Build and maintain responsive websites and front-end interfaces, implement web layouts and UI with modern frontend tools and WordPress, integrate APIs, troubleshoot front-end issues, and improve usability across screen sizes.',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'WordPress', 'Responsive Design'],
   },
   {
-    period: '2021 - 2024',
-    role: 'Frontend Engineer',
-    company: 'Northstar Labs',
-    url: '#',
+    period: 'PROJECT PORTFOLIO',
+    role: 'WordPress Developer',
+    company: 'Client Websites & E-commerce',
     description:
-      'Built customer-facing workflows, internal tools, and design-system primitives used across multiple product teams.',
-    technologies: ['Vite', 'REST APIs', 'Testing Library', 'CSS', 'Node.js'],
-    previousPositions: ['UI Engineer', 'Product Engineer'],
-  },
-  {
-    period: '2019 - 2021',
-    role: 'UI Engineer',
-    company: 'Orbit Digital',
-    url: '#',
-    description:
-      'Delivered performant marketing platforms and prototype-heavy product explorations for early-stage teams.',
-    technologies: ['React', 'JavaScript', 'CSS', 'Performance', 'Design Systems'],
+      'Delivered education, corporate, event, real-estate, and e-commerce websites, with particular strength in WordPress, WooCommerce, responsive UI, and practical content management.',
+    technologies: ['WordPress', 'WooCommerce', 'Tailwind CSS', 'Bootstrap', 'REST APIs', 'Git & GitHub'],
   },
 ];

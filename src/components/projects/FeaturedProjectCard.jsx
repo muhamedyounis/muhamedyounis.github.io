@@ -11,7 +11,8 @@ function FeaturedProjectCard({ project }) {
         src={project.thumbnail || project.coverImage}
         alt={`${project.title} thumbnail`}
         label={project.title}
-        className="featured-project-image"
+        className="featured-project-image thumbnail-frame"
+        imgClassName="project-thumbnail-image"
         width="420"
         height="260"
       />

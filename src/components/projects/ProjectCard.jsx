@@ -13,7 +13,8 @@ function ProjectCard({ project, showImage = false }) {
             src={project.thumbnail || project.coverImage}
             alt={`${project.title} preview`}
             label={project.title}
-            className="mb-5 aspect-[16/10]"
+            className="mb-5 aspect-[16/10] thumbnail-frame"
+            imgClassName="project-thumbnail-image"
             width="480"
             height="300"
           />

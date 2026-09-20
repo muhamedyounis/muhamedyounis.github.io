@@ -1,302 +1,74 @@
+const base = '/images/projects/my-projects';
+
+function screenshot(src, alt, featured = false) {
+  return { src: `${base}/${src}`, alt, caption: alt, featured, width: 1280, height: 800 };
+}
+
+function project({ slug, title, year = '2025', category = 'Frontend', featured = false, summary, folder, images, stack, client = 'Client project', liveUrl }) {
+  const screenshots = images.map((image, index) => screenshot(`${folder}/${image.file}`, image.alt, index === 0));
+  return {
+    slug, title, year, category, featured, summary,
+    description: [`A real-world ${category.toLowerCase()} project created for ${client.toLowerCase()}, with a focus on clear content, responsive layouts, and dependable user journeys.`, 'The interface was shaped around the project goals, brand requirements, and the practical needs of the people using the website.'],
+    role: 'Frontend Web Developer', duration: 'Project delivery', client, status: 'Completed', stack,
+    coverImage: screenshots[0]?.src, thumbnail: screenshots[0]?.src, screenshots,
+    highlights: ['Translated requirements and visual direction into responsive frontend interfaces.', 'Built reusable page patterns that keep content consistent across screen sizes.', 'Focused on usability, performance, and maintainable implementation.'],
+    challenges: [{ title: 'Balancing brand and usability', description: 'The implementation keeps the visual identity distinctive while making navigation, content, and calls to action easy to understand on desktop and mobile.' }],
+    outcome: ['Delivered a polished, responsive website ready for real visitors and ongoing content updates.'],
+    ...(liveUrl ? { liveUrl } : {}),
+  };
+}
+
 export const projects = [
-  {
-    slug: 'analytics-dashboard',
-    title: 'Analytics Dashboard',
-    year: '2026',
-    category: 'Frontend',
-    featured: true,
-    summary: 'A modular analytics workspace for teams that need fast filtering and clear performance signals.',
-    description: [
-      'This concept project explores a dense analytics surface with accessible filters, responsive metric cards, and chart modules that preserve context across breakpoints.',
-      'The interface is designed around scanning first and drilling in second, with strong keyboard affordances and reduced layout movement during data refreshes.',
-    ],
-    role: 'Frontend Engineer',
-    duration: '4 months',
-    client: 'Internal product',
-    status: 'Completed',
-    stack: ['React', 'Tailwind CSS', 'Vite', 'Charts', 'Accessibility'],
-    coverImage: '/images/projects/analytics/cover.svg',
-    thumbnail: '/images/projects/analytics/thumb.svg',
-    screenshots: [
-      {
-        src: '/images/projects/analytics/dashboard.svg',
-        alt: 'Analytics dashboard overview with charts and metrics',
-        caption: 'Main dashboard with priority metrics, trend charts, and saved segments.',
-        featured: true,
-        width: 1200,
-        height: 780,
-      },
-      {
-        src: '/images/projects/analytics/reports.svg',
-        alt: 'Analytics reporting interface with filters',
-        caption: 'Report builder with scoped filters and export controls.',
-        width: 960,
-        height: 680,
-      },
-    ],
-    highlights: [
-      'Created reusable metric, table, and chart modules.',
-      'Improved keyboard navigation across filtering workflows.',
-      'Reserved loading space to reduce visual instability.',
-    ],
-    challenges: [
-      {
-        title: 'Rendering large datasets',
-        description:
-          'The core challenge was keeping dense data readable while avoiding slow interactions. The final approach splits overview and detail views, defers heavy panels, and keeps controls close to the content they affect.',
-      },
-    ],
-    outcome: ['Reduced time-to-insight by a placeholder 32% in moderated internal testing.'],
-    liveUrl: '#',
-    repositoryUrl: '#',
-    stars: '1.8k',
-  },
-  {
-    slug: 'collaborative-task-manager',
-    title: 'Collaborative Task Manager',
-    year: '2026',
-    category: 'Full Stack',
-    featured: true,
-    summary: 'A calm project planning tool with shared boards, activity history, and keyboard-first task flows.',
-    description: [
-      'The task manager focuses on making collaborative planning feel low-friction without hiding important project state.',
-      'It includes board, list, and detail views with accessible drag alternatives and predictable focus movement.',
-    ],
-    role: 'Frontend Engineer',
-    duration: '3 months',
-    client: 'Product concept',
-    status: 'Prototype',
-    stack: ['React', 'Node.js', 'REST APIs', 'Testing Library', 'CSS'],
-    coverImage: '/images/projects/tasks/cover.svg',
-    thumbnail: '/images/projects/tasks/thumb.svg',
-    screenshots: [
-      {
-        src: '/images/projects/tasks/board.svg',
-        alt: 'Task board with grouped cards',
-        caption: 'Board view with grouped work streams and visible ownership.',
-        featured: true,
-        width: 1200,
-        height: 780,
-      },
-      {
-        src: '/images/projects/tasks/detail.svg',
-        alt: 'Task detail pane with comments and checklist',
-        caption: 'Task detail flow with comments, checklist items, and activity.',
-        width: 960,
-        height: 680,
-      },
-    ],
-    highlights: [
-      'Designed accessible alternatives for drag-and-drop interactions.',
-      'Built reusable list virtualization boundaries.',
-      'Introduced optimistic UI states with clear rollback messaging.',
-    ],
-    challenges: [
-      {
-        title: 'Collaboration without noise',
-        description:
-          'Realtime interfaces can become visually loud. Presence, comments, and activity updates were grouped by importance so users could keep working without constant interruption.',
-      },
-    ],
-    outcome: ['Improved task completion clarity with placeholder qualitative feedback from pilot teams.'],
-    liveUrl: '#',
-    repositoryUrl: '#',
-    stars: '924',
-  },
-  {
-    slug: 'accessible-commerce-platform',
-    title: 'Accessible Commerce Platform',
-    year: '2025',
-    category: 'Frontend',
-    featured: true,
-    summary: 'A conversion-focused storefront system with accessible product discovery and checkout patterns.',
-    description: [
-      'This storefront concept combines editorial product storytelling with robust filtering, cart, and checkout UI.',
-      'The project emphasizes semantic controls, strong error recovery, and interaction patterns that work for touch, keyboard, and assistive tech users.',
-    ],
-    role: 'Frontend Engineer',
-    duration: '5 months',
-    client: 'Retail platform',
-    status: 'Completed',
-    stack: ['React', 'JavaScript', 'Tailwind CSS', 'A11y', 'Performance'],
-    coverImage: '/images/projects/commerce/cover.svg',
-    thumbnail: '/images/projects/commerce/thumb.svg',
-    screenshots: [
-      {
-        src: '/images/projects/commerce/storefront.svg',
-        alt: 'Commerce storefront with product cards and filters',
-        caption: 'Storefront browsing surface with accessible filter groups.',
-        featured: true,
-        width: 1200,
-        height: 780,
-      },
-      {
-        src: '/images/projects/commerce/checkout.svg',
-        alt: 'Checkout form with order summary',
-        caption: 'Checkout steps with persistent order context and validation.',
-        width: 960,
-        height: 680,
-      },
-    ],
-    highlights: [
-      'Built robust form validation with clear recovery paths.',
-      'Improved image loading and reserved media dimensions.',
-      'Documented reusable commerce interaction patterns.',
-    ],
-    challenges: [
-      {
-        title: 'Keeping checkout confidence high',
-        description:
-          'The checkout needed to feel quick without sacrificing clarity. Validation, summaries, and progress feedback were kept visible and consistent across viewport sizes.',
-      },
-    ],
-    outcome: ['Raised checkout usability scores by a placeholder 24% across internal review sessions.'],
-    liveUrl: '#',
-    repositoryUrl: '#',
-    stars: '612',
-  },
-  {
-    slug: 'developer-documentation-system',
-    title: 'Developer Documentation System',
-    year: '2025',
-    category: 'Design Systems',
-    featured: true,
-    summary: 'A documentation experience for component APIs, usage guidance, and engineering standards.',
-    description: [
-      'The documentation system organizes code examples, component states, contribution guidance, and release notes for product engineers.',
-      'It is structured for fast lookup, predictable navigation, and maintainable content ownership.',
-    ],
-    role: 'Frontend Engineer',
-    duration: '6 months',
-    client: 'Platform team',
-    status: 'Completed',
-    stack: ['React', 'MDX', 'Design Systems', 'Search', 'CSS'],
-    coverImage: '/images/projects/docs/cover.svg',
-    thumbnail: '/images/projects/docs/thumb.svg',
-    screenshots: [
-      {
-        src: '/images/projects/docs/library.svg',
-        alt: 'Documentation page with component examples',
-        caption: 'Component documentation with examples, props, and guidance.',
-        featured: true,
-        width: 1200,
-        height: 780,
-      },
-      {
-        src: '/images/projects/docs/search.svg',
-        alt: 'Documentation search results interface',
-        caption: 'Search results tuned for component and guideline discovery.',
-        width: 960,
-        height: 680,
-      },
-    ],
-    highlights: [
-      'Created reusable documentation page templates.',
-      'Improved discoverability through structured navigation and search.',
-      'Reduced repeated implementation questions for product teams.',
-    ],
-    challenges: [
-      {
-        title: 'Making standards easy to adopt',
-        description:
-          'The team needed documentation that was authoritative but not intimidating. Examples, anti-patterns, and migration notes were grouped together so engineers could act quickly.',
-      },
-    ],
-    outcome: ['Reduced recurring support requests by a placeholder 40% after rollout.'],
-    liveUrl: '#',
-    repositoryUrl: '#',
-    stars: '2.4k',
-  },
-  {
-    slug: 'component-audit-toolkit',
-    title: 'Component Audit Toolkit',
-    year: '2024',
-    category: 'Open Source',
-    featured: false,
-    summary: 'A lightweight checklist and reporting tool for reviewing component accessibility and API consistency.',
-    description: ['A practical toolkit for design-system maintainers who need repeatable audits.'],
-    role: 'Maintainer',
-    duration: '2 months',
-    client: 'Open source',
-    status: 'Active',
-    stack: ['JavaScript', 'Accessibility', 'CLI', 'Markdown'],
-    coverImage: '/images/projects/audit/cover.svg',
-    thumbnail: '/images/projects/audit/thumb.svg',
-    screenshots: [],
-    highlights: ['Standardized review criteria.', 'Generated shareable reports.'],
-    challenges: [],
-    outcome: ['Adopted in placeholder internal design-system reviews.'],
-    repositoryUrl: '#',
-    stars: '418',
-  },
-  {
-    slug: 'mobile-banking-prototype',
-    title: 'Mobile Banking Prototype',
-    year: '2024',
-    category: 'Frontend',
-    featured: false,
-    summary: 'A responsive finance prototype focused on transaction review and secure account controls.',
-    description: ['A high-fidelity prototype for testing mobile-first financial workflows.'],
-    role: 'UI Engineer',
-    duration: '8 weeks',
-    client: 'Finance concept',
-    status: 'Prototype',
-    stack: ['React', 'CSS', 'Forms', 'Testing Library'],
-    coverImage: '/images/projects/banking/cover.svg',
-    thumbnail: '/images/projects/banking/thumb.svg',
-    screenshots: [],
-    highlights: ['Mapped sensitive flows to clear confirmation states.'],
-    challenges: [],
-    outcome: ['Validated navigation model with placeholder research sessions.'],
-    liveUrl: '#',
-  },
-  {
-    slug: 'release-notes-hub',
-    title: 'Release Notes Hub',
-    year: '2023',
-    category: 'Full Stack',
-    featured: false,
-    summary: 'A publishing workflow for product updates, changelogs, and audience-specific announcements.',
-    description: ['A focused content hub that helps teams ship concise release communication.'],
-    role: 'Frontend Engineer',
-    duration: '10 weeks',
-    client: 'SaaS platform',
-    status: 'Completed',
-    stack: ['React', 'Node.js', 'REST APIs', 'Search'],
-    coverImage: '/images/projects/releases/cover.svg',
-    thumbnail: '/images/projects/releases/thumb.svg',
-    screenshots: [],
-    highlights: ['Built editorial preview states and scheduling UI.'],
-    challenges: [],
-    outcome: ['Improved release visibility with placeholder engagement metrics.'],
-    liveUrl: '#',
-    repositoryUrl: '#',
-  },
-  {
-    slug: 'design-token-studio',
-    title: 'Design Token Studio',
-    year: '2023',
-    category: 'Design Systems',
-    featured: false,
-    summary: 'A token exploration interface for theme previews, contrast checks, and cross-platform exports.',
-    description: ['A concept tool for making design token decisions visible and testable.'],
-    role: 'Design Engineer',
-    duration: '12 weeks',
-    client: 'Platform concept',
-    status: 'Completed',
-    stack: ['React', 'Design Tokens', 'CSS', 'Accessibility'],
-    coverImage: '/images/projects/tokens/cover.svg',
-    thumbnail: '/images/projects/tokens/thumb.svg',
-    screenshots: [],
-    highlights: ['Added contrast previews and export summaries.'],
-    challenges: [],
-    outcome: ['Helped teams compare placeholder theme options faster.'],
-    repositoryUrl: '#',
-    stars: '735',
-  },
+  project({ slug: 'better-house', title: 'Better House', year: '2026', featured: true, summary: 'A real-estate website presenting residential developments, projects, and property details with a clear visual experience.', folder: 'Better House', client: 'Better House', category: 'Landing Pages', stack: ['Responsive Design', 'Landing Page', 'Real Estate', 'UI Development'], images: [{ file: 'betterhouse-eg.com.webp', alt: 'Better House homepage' }, { file: 'betterhouse-eg.com-projects.webp', alt: 'Better House projects page' }, { file: 'betterhouse-eg.com-project-sky-new-heliopolis.webp', alt: 'Better House Sky New Heliopolis project page' }] }),
+  project({ slug: 'tameco', title: 'Tameco', year: '2026', featured: true, summary: 'A corporate website for presenting company information, products, solutions, and completed projects.', folder: 'Tameco', client: 'Tameco', category: 'Landing Pages', stack: ['Responsive Design', 'Corporate Website', 'UI Development', 'Content Architecture'], images: [{ file: 'dev.tamecoegypt.com.webp', alt: 'Tameco homepage' }, { file: 'dev.tamecoegypt.com-about-us.webp', alt: 'Tameco about page' }, { file: 'dev.tamecoegypt.com-products-solutions.webp', alt: 'Tameco products and solutions page' }, { file: 'dev.tamecoegypt.com-projects.webp', alt: 'Tameco projects page' }] }),
+  project({ slug: 'vidala-resort', title: 'Vidala Resort', year: '2026', featured: true, summary: 'A focused resort landing page designed to present the destination, atmosphere, and visitor journey.', folder: 'Vidala Resort Landing Page', client: 'Vidala Resort', category: 'Landing Pages', stack: ['Responsive Design', 'Landing Page', 'Visual Storytelling', 'UI Development'], images: [{ file: 'vidala-resort.com.webp', alt: 'Vidala Resort landing page' }] }),
+  project({ slug: 'sync7', title: 'Sync7', year: '2026', featured: true, summary: 'A focused landing page with a clear value proposition and streamlined presentation for a modern digital product.', folder: 'Sync7 Landing Page', client: 'Sync7', category: 'Landing Pages', stack: ['Responsive Design', 'Landing Page', 'UI Development'], images: [{ file: 'sync7.webp', alt: 'Sync7 landing page' }] }),
+  project({ slug: 'netre', title: 'Netre', year: '2026', summary: 'A clean landing page for presenting a real-estate brand and its digital presence.', folder: 'Netre Landing Page', client: 'Netre', category: 'Landing Pages', stack: ['Responsive Design', 'Landing Page', 'UI Development'], images: [{ file: 'dev.net-re.com.webp', alt: 'Netre landing page' }] }),
+  project({ slug: 'st-mary-church-zamalek', title: 'St. Mary Church Zamalek', year: '2026', summary: 'A welcoming landing page for presenting church information, identity, and visitor-facing content.', folder: 'St. Mary Church Zamalek Landing Page', client: 'St. Mary Church Zamalek', category: 'Landing Pages', stack: ['Responsive Design', 'Landing Page', 'UI Development'], images: [{ file: 'localhost.webp', alt: 'St. Mary Church Zamalek landing page' }] }),
+  project({ slug: 'st-anthony-schools', title: 'St. Anthony Schools', year: '2025', summary: 'A complete school website presenting admissions, curriculum, campus information, and contact journeys.', folder: 'StAnthonySchools/compressed', client: 'St. Anthony Schools', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'UI Development', 'SEO'], liveUrl: 'https://stanthonyschools.com/', images: [{ file: 'screencapture-stanthonyschools-2025-08-12-22_43_43.webp', alt: 'St. Anthony Schools homepage' }, { file: 'screencapture-stanthonyschools-admissions-2025-08-12-22_45_48.webp', alt: 'St. Anthony Schools admissions page' }, { file: 'screencapture-stanthonyschools-curriculum-2025-08-12-22_45_10.webp', alt: 'St. Anthony Schools curriculum page' }] }),
+  project({ slug: 'followvita', title: 'FollowVita', year: '2025', featured: true, summary: 'A dashboard experience that organizes health and product information into focused, usable screens.', folder: 'FollowVita', client: 'FollowVita', category: 'Frontend', stack: ['Frontend Development', 'Dashboard UI', 'Responsive Design', 'UX Implementation'], images: [{ file: 'follow-vita-dashboard-screen-1.webp', alt: 'FollowVita dashboard overview' }, { file: 'follow-vita-dashboard-screen-2.webp', alt: 'FollowVita dashboard screen' }, { file: 'follow-vita-dashboard-screen-3.webp', alt: 'FollowVita dashboard detail view' }] }),
+  project({ slug: 'bzqanun', title: 'BZQanun', year: '2025', featured: true, summary: 'An e-commerce experience for qanun instruments with product discovery, customization, services, and checkout flows.', folder: 'BZQanun/compressed', client: 'BZQanun', category: 'E-commerce', stack: ['WordPress', 'WooCommerce', 'E-commerce', 'Responsive Design'], liveUrl: 'https://bzqanun.com/', images: [{ file: 'screencapture-bzqanun-2025-08-12-23_34_06.webp', alt: 'BZQanun homepage' }, { file: 'screencapture-bzqanun-shop-2025-08-12-23_35_39.webp', alt: 'BZQanun shop page' }, { file: 'screencapture-bzqanun-customize-2025-08-12-23_36_56.webp', alt: 'BZQanun customization page' }] }),
+  project({ slug: 'petit-bebe', title: 'Petit Bebe', year: '2025', featured: true, summary: 'A retail website with product browsing, product detail pages, store discovery, and shopping journeys.', folder: 'PetitBebe/compressed', client: 'Petit Bebe', category: 'E-commerce', stack: ['WordPress', 'WooCommerce', 'E-commerce', 'UI Development'], liveUrl: 'https://petitbebe.store/', images: [{ file: 'screencapture-petitbebe-store-2025-08-12-22_53_01.webp', alt: 'Petit Bebe store homepage' }, { file: 'screencapture-petitbebe-store-shop-2025-08-12-22_53_55.webp', alt: 'Petit Bebe shop page' }, { file: 'screencapture-petitbebe-store-product-car-seat-z1-2025-08-12-22_55_17.webp', alt: 'Petit Bebe product detail page' }] }),
+  project({ slug: 'metropolitan-school', title: 'Metropolitan School', summary: 'An education website communicating school life, admissions, programs, and the school community.', folder: 'MetropolitanSchool/compressed', client: 'Metropolitan School', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'Content Architecture', 'UI Development'], liveUrl: 'https://metropolitanschool.edu.eg/', images: [{ file: 'screencapture-metropolitanschool-edu-eg-2025-08-12-23_16_17.webp', alt: 'Metropolitan School homepage' }, { file: 'screencapture-metropolitanschool-edu-eg-admissions-2025-08-12-23_19_15.webp', alt: 'Metropolitan School admissions page' }, { file: 'screencapture-metropolitanschool-edu-eg-our-school-school-day-2025-08-12-23_20_00.webp', alt: 'Metropolitan School school day page' }] }),
+  project({ slug: 'geos-egypt', title: 'GEOS Egypt', summary: 'A corporate website presenting services, products, projects, and company information in a structured way.', folder: 'Geos/compressed', client: 'GEOS Egypt', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'Corporate Website', 'SEO'], liveUrl: 'https://geosegypt.com/', images: [{ file: 'screencapture-geosegypt-2025-08-12-22_58_31.webp', alt: 'GEOS Egypt homepage' }, { file: 'screencapture-geosegypt-services-2025-08-12-23_01_05.webp', alt: 'GEOS Egypt services page' }, { file: 'screencapture-geosegypt-projects-2025-08-12-23_01_37.webp', alt: 'GEOS Egypt projects page' }] }),
+  project({ slug: 'onca-solutions', title: 'ONCA Solutions', summary: 'A technology services website with clear service positioning, company information, and contact flows.', folder: 'Onca/compressed', client: 'ONCA Solutions', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'UI Development', 'Contact Forms'], liveUrl: 'https://onca.solutions/', images: [{ file: 'screencapture-onca-solutions-2025-08-12-23_05_10.webp', alt: 'ONCA Solutions homepage' }, { file: 'screencapture-onca-solutions-it-services-hosting-2025-08-12-23_06_32.webp', alt: 'ONCA Solutions hosting services page' }, { file: 'screencapture-onca-solutions-contact-us-2025-08-12-23_07_00.webp', alt: 'ONCA Solutions contact page' }] }),
+  project({ slug: 'congtent', title: 'Congtent', summary: 'A creative agency website built around services, portfolio work, and an editorial content experience.', folder: 'Congtent/compressed', client: 'Congtent', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'Portfolio UI', 'Blog'], liveUrl: 'https://congtent.com/', images: [{ file: 'screencapture-congtent-2025-08-12-22_49_32.webp', alt: 'Congtent homepage' }, { file: 'screencapture-congtent-portfolio-2025-08-12-22_50_36.webp', alt: 'Congtent portfolio page' }, { file: 'screencapture-congtent-services-2025-08-12-22_51_09.webp', alt: 'Congtent services page' }] }),
+  project({ slug: 'esbc', title: 'ESBC', summary: 'A multi-page business website with a strong visual system and structured information architecture.', folder: 'ESBC', client: 'ESBC', category: 'WordPress', stack: ['WordPress', 'UI Development', 'Responsive Design', 'Content Management'], images: [{ file: 'esbc-screen-1-scaled.webp', alt: 'ESBC homepage' }, { file: 'esbc-screen-2-scaled.webp', alt: 'ESBC interior page' }, { file: 'esbc-screen-4-scaled.webp', alt: 'ESBC service page' }] }),
+  project({ slug: 'elwan', title: 'Elwan', summary: 'An e-commerce store with shopping, account, wallet, checkout, and product discovery experiences.', folder: 'Elwan/compressed', client: 'Elwan', category: 'E-commerce', stack: ['WordPress', 'WooCommerce', 'E-commerce', 'Checkout UX'], liveUrl: 'https://elwan.eg/', images: [{ file: 'screencapture-elwan-eg-2025-08-28-18_28_21.webp', alt: 'Elwan store homepage' }, { file: 'screencapture-elwan-eg-shop-2025-08-28-18_31_04.webp', alt: 'Elwan shop page' }, { file: 'screencapture-elwan-eg-checkout-2025-08-28-18_35_02.webp', alt: 'Elwan checkout page' }] }),
+  project({ slug: 'dm-developments', title: 'DM Developments', summary: 'A real-estate presentation website for showcasing a development and its lifestyle-focused visual story.', folder: 'DMDevelopments', client: 'DM Developments', category: 'WordPress', stack: ['WordPress', 'Real Estate', 'Responsive Design', 'UI Development'], images: [{ file: 'the-groove-screen-1-scaled.webp', alt: 'DM Developments The Groove homepage' }, { file: 'the-groove-screen-2-scaled.webp', alt: 'DM Developments project page' }, { file: 'the-groove-screen-3.webp', alt: 'DM Developments project detail' }] }),
+  project({ slug: 'iesco', title: 'IESCO', summary: 'An industrial and training website combining company information, services, products, and courses.', folder: 'IESCO/compressed', client: 'IESCO', category: 'WordPress', stack: ['WordPress', 'Responsive Design', 'Courses', 'Content Architecture'], liveUrl: 'https://iesco-eg.com/', images: [{ file: 'screencapture-iesco-eg-2025-08-12-23_08_55.webp', alt: 'IESCO homepage' }, { file: 'screencapture-iesco-eg-services-2025-08-12-23_11_25.webp', alt: 'IESCO services page' }, { file: 'screencapture-iesco-eg-courses-2025-08-12-23_12_30.webp', alt: 'IESCO courses page' }] }),
+  project({ slug: 'kinetics-group', title: 'Kinetics Group', summary: 'A corporate group website with service pages and case-study presentation for major projects.', folder: 'KineticsGroup', client: 'Kinetics Group', category: 'WordPress', stack: ['WordPress', 'Corporate Website', 'Case Studies', 'Responsive Design'], liveUrl: 'https://kineticsgroup.co/', images: [{ file: 'screencapture-kineticsgroup-co-2025-08-12-23_29_47.png', alt: 'Kinetics Group homepage' }, { file: 'screencapture-kineticsgroup-co-our-services-2025-08-12-23_32_17.png', alt: 'Kinetics Group services page' }, { file: 'screencapture-kineticsgroup-co-project-hilti-2025-08-12-23_31_33.png', alt: 'Kinetics Group Hilti project page' }] }),
+  project({ slug: 'hilti', title: 'Hilti Project', summary: 'A project presentation experience for a Hilti-related installation and development case study.', folder: 'Hilti', client: 'Kinetics Group', category: 'Frontend', stack: ['WordPress', 'Case Study UI', 'Responsive Design', 'Visual Storytelling'], images: [{ file: '0073a539f1440bcf523551213766a60bffae304b.png', alt: 'Hilti project screen' }, { file: '155c9fe6619f701ceb4c196f7255b91d6f8f3794.png', alt: 'Hilti project detail screen' }, { file: 'ef21205fa8de888aa4f4066768a190e6f13fb129.png', alt: 'Hilti project gallery screen' }] }),
+  project({ slug: 'liftech', title: 'Liftech Show', summary: 'An event and exhibition website with information, visit planning, and contact journeys.', folder: 'Liftech', client: 'Liftech Show', category: 'WordPress', stack: ['WordPress', 'Event Website', 'Responsive Design', 'UI Development'], images: [{ file: 'screencapture-liftechshow-2025-08-12-23_22_39.png', alt: 'Liftech Show homepage' }, { file: 'screencapture-liftechshow-about-2025-08-12-23_27_02.png', alt: 'Liftech Show about page' }, { file: 'screencapture-liftechshow-visit-2025-08-12-23_27_59.png', alt: 'Liftech Show visit page' }] }),
 ];
 
-export const projectCategories = ['All', 'Frontend', 'Full Stack', 'Design Systems', 'Open Source'];
+// Keep every supplied screen in the detail gallery while using the first screen as the card preview.
+const additionalGalleryImages = {
+  'st-anthony-schools': ['screencapture-stanthonyschools-about-us-2025-08-12-22_44_39.webp', 'screencapture-stanthonyschools-contact-us-2025-08-12-22_47_24.webp', 'screencapture-stanthonyschools-how-to-apply-2025-08-12-22_46_14.webp'],
+  followvita: ['follow-vita-dashboard-screen-4.webp', 'follow-vita-dashboard-screen-5.webp', 'follow-vita-dashboard-screen-6.webp', 'follow-vita-dashboard-screen-7.webp', 'follow-vita-dashboard-screen-8.webp'],
+  bzqanun: ['screencapture-bzqanun-contact-us-2025-08-12-23_38_14.webp', 'screencapture-bzqanun-product-3-octave-royal-white-2025-08-12-23_36_16.webp', 'screencapture-bzqanun-qanun-tuner-2025-08-12-23_37_45.webp', 'screencapture-bzqanun-request-service-2025-08-12-23_36_35.webp', 'screencapture-bzqanun-service-tag-2025-08-12-23_37_21.webp'],
+  'petit-bebe': ['screencapture-petitbebe-store-store-locator-2025-08-12-22_54_26.webp'],
+  'metropolitan-school': ['screencapture-metropolitanschool-edu-eg-early-childhood-2025-08-12-23_20_29.webp', 'screencapture-metropolitanschool-edu-eg-metropolitan-pre-school-2025-08-12-23_21_07.webp', 'screencapture-metropolitanschool-edu-eg-our-school-2025-08-12-23_17_43.webp', 'screencapture-metropolitanschool-edu-eg-our-school-meet-the-team-2025-08-12-23_18_44.webp', 'screencapture-metropolitanschool-edu-eg-our-school-met-character-pillars-2025-08-12-23_18_18.webp'],
+  'geos-egypt': ['screencapture-geosegypt-about-us-2025-08-12-23_00_30.webp', 'screencapture-geosegypt-contact-us-2025-08-12-23_03_29.webp', 'screencapture-geosegypt-products-2025-08-12-23_02_58.webp'],
+  'congtent': ['screencapture-congtent-blog-2025-08-12-22_51_49.webp'],
+  esbc: ['esbc-screen-3.webp', 'esbc-screen-3%20(1).webp', 'esbc-screen-5.webp', 'esbc-screen-6.webp', 'esbc-screen-7-1-scaled.webp', 'esbc-screen-8-scaled.webp', 'esbc-screen-9.webp'],
+  elwan: ['screencapture-elwan-eg-2025-08-28-18_30_22.webp', 'screencapture-elwan-eg-my-account-2025-08-28-18_31_43.webp', 'screencapture-elwan-eg-my-account-wps-wallet-2025-08-28-18_33_31.webp', 'Screenshot%202025-08-28%20182933.webp'],
+  'dm-developments': ['the-groove-screen-4.webp', 'the-groove-screen-5.webp'],
+  iesco: ['screencapture-iesco-eg-about-us-2025-08-12-23_12_47.webp', 'screencapture-iesco-eg-contact-us-2025-08-12-23_13_17.webp', 'screencapture-iesco-eg-product-category-ntn-2025-08-12-23_10_17.webp'],
+  'kinetics-group': ['screencapture-kineticsgroup-co-contact-us-2025-08-12-23_33_06.png', 'screencapture-kineticsgroup-co-projects-2025-08-12-23_30_46.png'],
+  hilti: ['29fb1c772dfcc47fefba04b85947890aa73df01f-1.png', '3a65580716e4c8ebcf3d6aa9fe9b014109fce125.png', '46cd9f3286d0dced5c0924e5890d12257625bab2.png', '6934b4a85228ace9d952b4259a1dd0239a020e40.png', '6e08840b0cbf5bdd447e249a25137c7bdb2dd07b.png', '84715f97a9829c20a2646ccb5e6bc52bf671a993.png', 'ac9b4cb432aeff6e3f844819cc7bbf1b56030640.png', 'ede162ec5448ecac8b00b3d42a070a108dd57f13.png'],
+  liftech: ['screencapture-liftechshow-about-2025-08-12-23_27_02.webp', 'screencapture-liftechshow-contacts-2025-08-12-23_28_37.webp'],
+};
+
+const projectFolders = Object.fromEntries(projects.map((item) => [item.slug, item.screenshots[0].src.slice(base.length + 1, item.screenshots[0].src.lastIndexOf('/'))]));
+Object.entries(additionalGalleryImages).forEach(([slug, files]) => {
+  const item = projects.find((project) => project.slug === slug);
+  if (!item) return;
+  const folder = projectFolders[slug];
+  item.screenshots.push(...files.map((file) => screenshot(`${folder}/${file}`, `${item.title} screenshot`)));
+});
+
+export const projectCategories = ['All', 'WordPress', 'E-commerce', 'Frontend', 'Landing Pages'];
 
 export function getProjectBySlug(slug) {
   return projects.find((project) => project.slug === slug);
@@ -305,8 +77,5 @@ export function getProjectBySlug(slug) {
 export function getProjectNeighbors(slug) {
   const index = projects.findIndex((project) => project.slug === slug);
   if (index === -1) return { previous: null, next: null };
-  return {
-    previous: projects[(index - 1 + projects.length) % projects.length],
-    next: projects[(index + 1) % projects.length],
-  };
+  return { previous: projects[(index - 1 + projects.length) % projects.length], next: projects[(index + 1) % projects.length] };
 }

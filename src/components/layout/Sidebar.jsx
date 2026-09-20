@@ -6,7 +6,7 @@ function Sidebar({ profile, navItems, activeSection }) {
     <aside className="sidebar">
       <div>
         <a
-          href="/younisdev/"
+          href={import.meta.env.BASE_URL}
           className="profile-lockup"
           aria-label={`${profile.name} home`}
         >
@@ -15,6 +15,9 @@ function Sidebar({ profile, navItems, activeSection }) {
           <p className="tagline">{profile.tagline}</p>
         </a>
         <SectionNav items={navItems} activeSection={activeSection} />
+        <a className="secondary-link mt-8 inline-flex" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+          View CV
+        </a>
       </div>
       <SocialLinks links={profile.socialLinks} />
     </aside>

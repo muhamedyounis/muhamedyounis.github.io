@@ -18,7 +18,7 @@ function ProjectGallery({ screenshots = [] }) {
   if (!screenshots.length) {
     return (
       <div className="empty-gallery">
-        <p>Screenshot gallery coming soon.</p>
+        <p>No screenshots are available for this project.</p>
       </div>
     );
   }

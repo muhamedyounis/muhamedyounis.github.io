@@ -103,7 +103,7 @@ function ProjectDetailPage() {
           <div>
             <h2>Key Highlights</h2>
             <ul className="detail-list">
-              {(project.highlights?.length ? project.highlights : ['Highlights will be added soon.']).map((item) => (
+              {(project.highlights?.length ? project.highlights : ['No highlights recorded for this project.']).map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -129,7 +129,7 @@ function ProjectDetailPage() {
         <section className="detail-section single">
           <h2>Outcome</h2>
           <ul className="detail-list">
-            {(project.outcome?.length ? project.outcome : ['Outcomes will be added soon.']).map((item) => (
+            {(project.outcome?.length ? project.outcome : ['No outcome details recorded for this project.']).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
