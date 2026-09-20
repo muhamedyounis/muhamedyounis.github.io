@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
 
 const focusableSelector =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
@@ -9,6 +9,11 @@ function ProjectLightbox({ screenshots, currentIndex, onClose, onNext, onPreviou
   const closeRef = useRef(null);
   const previousFocusRef = useRef(null);
   const current = screenshots[currentIndex];
+  const [zoom, setZoom] = useState(1.25);
+
+  useEffect(() => {
+    setZoom(1.25);
+  }, [currentIndex]);
 
   useEffect(() => {
     previousFocusRef.current = document.activeElement;
@@ -62,17 +67,39 @@ function ProjectLightbox({ screenshots, currentIndex, onClose, onNext, onPreviou
           <p>
             {currentIndex + 1} / {screenshots.length}
           </p>
-          <button type="button" onClick={onClose} aria-label="Close screenshot viewer" ref={closeRef}>
-            <X aria-hidden="true" />
-          </button>
+          <div className="lightbox-tools">
+            <button type="button" onClick={() => setZoom((value) => Math.max(1, value - 0.25))} aria-label="Zoom out">
+              <ZoomOut aria-hidden="true" />
+            </button>
+            <button type="button" onClick={() => setZoom(1.25)} aria-label="Reset zoom">
+              <RotateCcw aria-hidden="true" />
+            </button>
+            <button type="button" onClick={() => setZoom((value) => Math.min(4, value + 0.25))} aria-label="Zoom in">
+              <ZoomIn aria-hidden="true" />
+            </button>
+            <button type="button" onClick={onClose} aria-label="Close screenshot viewer" ref={closeRef}>
+              <X aria-hidden="true" />
+            </button>
+          </div>
         </div>
-        <div className="lightbox-stage">
+        <div
+          className="lightbox-stage"
+          onWheel={(event) => {
+            event.preventDefault();
+            setZoom((value) => Math.min(4, Math.max(1, value + (event.deltaY < 0 ? 0.15 : -0.15))));
+          }}
+        >
           {screenshots.length > 1 && (
             <button type="button" onClick={onPrevious} aria-label="Previous screenshot">
               <ChevronLeft aria-hidden="true" />
             </button>
           )}
-          <img className="lightbox-image" src={current.src} alt={current.alt} />
+          <img
+            className="lightbox-image"
+            src={current.src}
+            alt={current.alt}
+            style={{ transform: `scale(${zoom})` }}
+          />
           {screenshots.length > 1 && (
             <button type="button" onClick={onNext} aria-label="Next screenshot">
               <ChevronRight aria-hidden="true" />
