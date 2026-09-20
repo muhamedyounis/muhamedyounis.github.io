@@ -72,7 +72,7 @@ function ProjectLightbox({ screenshots, currentIndex, onClose, onNext, onPreviou
               <ChevronLeft aria-hidden="true" />
             </button>
           )}
-          <img src={current.src} alt={current.alt} />
+          <img className="lightbox-image" src={current.src} alt={current.alt} />
           {screenshots.length > 1 && (
             <button type="button" onClick={onNext} aria-label="Next screenshot">
               <ChevronRight aria-hidden="true" />

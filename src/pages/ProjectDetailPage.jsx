@@ -74,6 +74,7 @@ function ProjectDetailPage() {
           className="detail-cover"
           width="1280"
           height="760"
+          imgClassName="detail-cover-image"
           loading="eager"
         />
 

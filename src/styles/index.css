@@ -625,6 +625,11 @@ button {
   aspect-ratio: 16 / 9;
 }
 
+.detail-cover img.detail-cover-image {
+  object-fit: cover;
+  object-position: top center;
+}
+
 .detail-section {
   display: grid;
   gap: 2rem;
@@ -736,17 +741,17 @@ button {
   display: grid;
   place-items: center;
   background: rgba(3, 7, 18, 0.86);
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .lightbox {
-  width: min(100%, 74rem);
-  max-height: min(92vh, 54rem);
+  width: min(100%, 96rem);
+  max-height: calc(100svh - 1.5rem);
   overflow: auto;
   border: 1px solid var(--border);
-  border-radius: 0.55rem;
+  border-radius: 0.75rem;
   background: #081022;
-  padding: 1rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
 }
 
 .lightbox-toolbar,
@@ -775,12 +780,16 @@ button {
 }
 
 .lightbox-stage {
+  position: relative;
   gap: 0.75rem;
   justify-content: center;
 }
 
-.lightbox-stage img {
-  max-height: 70vh;
+.lightbox-stage img.lightbox-image {
+  display: block;
+  width: auto;
+  max-width: min(100%, calc(100vw - 7rem));
+  max-height: calc(100svh - 8rem);
   min-width: 0;
   border: 1px solid var(--border);
   border-radius: 0.45rem;
@@ -905,12 +914,27 @@ button {
   }
 
   .lightbox-stage {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    display: flex;
+    min-height: min(70svh, 40rem);
+    align-items: center;
   }
 
-  .lightbox-stage img {
+  .lightbox-stage > button {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .lightbox-stage > button:first-child {
+    left: 0.35rem;
+  }
+
+  .lightbox-stage > button:last-child {
+    right: 0.35rem;
+  }
+
+  .lightbox-stage img.lightbox-image {
     max-width: 100%;
+    max-height: calc(100svh - 10rem);
   }
 }
 

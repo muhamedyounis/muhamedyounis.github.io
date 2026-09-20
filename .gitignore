@@ -19,8 +19,5 @@ dist/
 .DS_Store
 Thumbs.db
 
-package.json
-package-lock.json
-vite.config.js
 # src/
 # public/
